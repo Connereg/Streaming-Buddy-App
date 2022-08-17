@@ -46,7 +46,24 @@ export class AppComponent {
         genre: "Drama",
         active: true
       }
+    ]
 
+    hulu = [
+      {
+        title: "127 Hours",
+        genre: "Suspence",
+        active: true
+      },
+      {
+        title: "Looper",
+        genre: "Action",
+        active: true
+      },
+      {
+        title: "Prometheus",
+        genre: "Sci-Fi",
+        active: true
+      }
     ]
 
   //   onUserPreference() {
@@ -63,6 +80,22 @@ export class AppComponent {
   //   }
   //   this.netflix.push(newFilm);
   // }
+
+  chooseStreamingService() {
+    let newArr: { title: string; genre: string; active: boolean; }[] = [];
+
+    if(this.streamingServiceInput == "hbo") {
+      newArr = this.hbo;
+    }
+    else if(this.streamingServiceInput == "netflix") {
+      newArr = this.netflix;
+    }
+    else if(this.streamingServiceInput == "hulu") {
+      newArr = this.hulu;
+    }
+
+    return newArr
+  }
 
   constructor() {
     console.log("Initiating Angular AppComponent Class");

@@ -10,15 +10,16 @@ Enter name of the application: <input type="text" [(ngModel)]="title" />
 <select name="streamService" id="stream-service-dropdown" [(ngModel)]="streamingServiceInput">
   <option value="hbo">HBO</option>
   <option value="netflix">Netflix</option>
+  <option value="hulu">Hulu</option>
 </select>
 <!-- <button type="button" (click)="onUserPreference()">Apply</button> -->
 <h1>
-  {{streamingServiceInput}}
+  {{streamingServiceInput.toUpperCase()}}
 </h1>
 
 <div>
   <ul>
-    <li *ngFor="let currentFilm of [streamingServiceInput]">
+    <li *ngFor="let currentFilm of chooseStreamingService()">
       <h4>
         {{currentFilm.title}}
       </h4>
@@ -28,9 +29,6 @@ Enter name of the application: <input type="text" [(ngModel)]="title" />
        
       <p *ngIf="currentFilm.active">is active</p>
       <p *ngIf="!currentFilm.active">is not active</p>
-    </li>
-    <li>
-
     </li>
   </ul>
 </div>
