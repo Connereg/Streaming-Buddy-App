@@ -1,44 +1,78 @@
 Enter name of the application: <input type="text" [(ngModel)]="title" />
 <p>My Application is {{ title }}</p>
-<p>Number of Players is {{netflix.length}}</p>
 
 <!-- <div>
   <button [disabled]="disablesNewMessage" (click)="onSendPlayer()">Send Message</button>
 </div> -->
 <!-- 
 // INPUTS FOR DESIRED MOVIE SPECS -->
-<select name="streamService" id="stream-service-dropdown" [(ngModel)]="streamingServiceInput">
-  <option value="hbo">HBO</option>
-  <option value="netflix">Netflix</option>
-  <option value="hulu">Hulu</option>
-</select>
+<label for="stream-service-dropdown">Streaming Service: &nbsp;&nbsp;</label>
+  <select name="streamService" id="stream-service-dropdown" [(ngModel)]="streamingServiceInput">
+    <option value="All" selected>All</option>
+    <option value="hbo">HBO</option>
+    <option value="netflix">Netflix</option>
+    <option value="hulu">Hulu</option>
+  </select><br/><br/>
+<label for="genre-selection-dropdown">Film Genre: &nbsp;&nbsp;</label>
+  <select name="genreSelection" id="genre-selection-dropdown" [(ngModel)]="genreSelectionInput">
+    <option value="All" selected>All</option>
+    <option value="Action">Action</option>
+    <option value="Drama">Drama</option>
+    <option value="Horror">Horror</option>
+    <option value="Suspense">Suspense</option>
+    <option value="Sci-fi">Sci-Fi</option>
+    <option value="Comedy">Comedy</option>
+    <option value="Mystery">Mystery</option>
+  </select>
+
 <!-- <button type="button" (click)="onUserPreference()">Apply</button> -->
 <h1>
   {{streamingServiceInput.toUpperCase()}}
 </h1>
 
+<h3> {{genreSelectionInput}}</h3>
+
 <div>
   <ul>
-    <li *ngFor="let currentFilm of chooseStreamingService()">
-      <h4>
-        {{currentFilm.title}}
-      </h4>
-      <p>
-        Genre: {{currentFilm.genre}}
-      </p>
-       
-      <p *ngIf="currentFilm.active">is active</p>
-      <p *ngIf="!currentFilm.active">is not active</p>
-    </li>
+      <li *ngFor="let currentFilm of chooseStreamingService()">
+        <!-- <div *ngIf=""> -->  
+          <h4 *ngIf="'All' == chosenGenre(); else elseBlock">
+            {{currentFilm.title}}
+          </h4>
+          <p *ngIf="'All' == chosenGenre(); else elseBlock">
+            Genre: {{currentFilm.genre}}
+          </p>
+          <p *ngIf="'All' == chosenGenre()">is active</p>
+          
+          <ng-template #elseBlock>
+            <h4 *ngIf="currentFilm.genre == chosenGenre()">
+              {{currentFilm.title}}
+            </h4>
+            <p *ngIf="currentFilm.genre == chosenGenre()">
+              Genre: {{currentFilm.genre}}
+            </p>
+            <p *ngIf="currentFilm.genre == chosenGenre()">is active</p>
+          </ng-template>
+        <!-- </div> -->
+      </li>
+    
   </ul>
 </div>
-<!-- <h4>New Player Generator</h4>
-<input id="player-name-input" placeholder="Player Name" [(ngModel)]="senderName">
-<input id="player-sport-input" placeholder="Player Sport" [(ngModel)]="senderSport">
-<select name="active" id="active-toggle" [(ngModel)]="senderActiveStatus">
-  <option value=true>active</option>
-  <option value=false>inactive</option>
+
+<h4>Add Film To List</h4>
+<input id="film-title-input" placeholder="Film Title" [(ngModel)]="newFilmTitle">
+<select name="Film Genre" id="new-film-genre-dropdown" [(ngModel)]="newFilmGenre">
+  <option value="Action" selected>Action</option>
+  <option value="Drama">Drama</option>
+  <option value="Horror">Horror</option>
+  <option value="Suspense">Suspense</option>
+  <option value="Sci-fi">Sci-Fi</option>
+  <option value="Comedy">Comedy</option>
+  <option value="Mystery">Mystery</option>
 </select>
-<div>
+<select name="active-input" id="active-toggle" [(ngModel)]="filmActiveStatus">
+  <option value=""></option>
+</select>
+<!-- <div>
   <button type="button" (click)="onSendPlayer()">Save Player</button>
 </div> -->
