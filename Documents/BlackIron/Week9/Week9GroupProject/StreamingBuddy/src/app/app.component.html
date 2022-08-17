@@ -1,0 +1,46 @@
+Enter name of the application: <input type="text" [(ngModel)]="title" />
+<p>My Application is {{ title }}</p>
+<p>Number of Players is {{netflix.length}}</p>
+
+<!-- <div>
+  <button [disabled]="disablesNewMessage" (click)="onSendPlayer()">Send Message</button>
+</div> -->
+<!-- 
+// INPUTS FOR DESIRED MOVIE SPECS -->
+<select name="streamService" id="stream-service-dropdown" [(ngModel)]="streamingServiceInput">
+  <option value="hbo">HBO</option>
+  <option value="netflix">Netflix</option>
+</select>
+<!-- <button type="button" (click)="onUserPreference()">Apply</button> -->
+<h1>
+  {{streamingServiceInput}}
+</h1>
+
+<div>
+  <ul>
+    <li *ngFor="let currentFilm of [streamingServiceInput]">
+      <h4>
+        {{currentFilm.title}}
+      </h4>
+      <p>
+        Genre: {{currentFilm.genre}}
+      </p>
+       
+      <p *ngIf="currentFilm.active">is active</p>
+      <p *ngIf="!currentFilm.active">is not active</p>
+    </li>
+    <li>
+
+    </li>
+  </ul>
+</div>
+<!-- <h4>New Player Generator</h4>
+<input id="player-name-input" placeholder="Player Name" [(ngModel)]="senderName">
+<input id="player-sport-input" placeholder="Player Sport" [(ngModel)]="senderSport">
+<select name="active" id="active-toggle" [(ngModel)]="senderActiveStatus">
+  <option value=true>active</option>
+  <option value=false>inactive</option>
+</select>
+<div>
+  <button type="button" (click)="onSendPlayer()">Save Player</button>
+</div> -->
