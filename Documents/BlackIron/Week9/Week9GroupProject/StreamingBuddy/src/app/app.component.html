@@ -14,7 +14,7 @@ Enter name of the application: <input type="text" [(ngModel)]="title" />
     <option value="hulu">Hulu</option>
   </select><br/><br/>
 <label for="genre-selection-dropdown">Film Genre: &nbsp;&nbsp;</label>
-  <select name="genreSelection" id="genre-selection-dropdown" [(ngModel)]="genreSelectionInput">
+  <select name="genreSelection" id="genre-selection-dropdown" [(ngModel)]="genreSelectionInput" onChange="settingGenreFunc()">
     <option value="All" selected>All</option>
     <option value="Action">Action</option>
     <option value="Drama">Drama</option>
@@ -32,10 +32,14 @@ Enter name of the application: <input type="text" [(ngModel)]="title" />
 
 <h3> {{genreSelectionInput}}</h3>
 
+<!-- <div>
+  <li *ngFor="let currentFilm of matchingFilms"></li>
+</div> -->
+
 <div>
   <ul>
       <li *ngFor="let currentFilm of chooseStreamingService()">
-        <!-- <div *ngIf=""> -->  
+        <!-- <div *ngIf=""> -->
           <h4 *ngIf="'All' == chosenGenre(); else elseBlock">
             {{currentFilm.title}}
           </h4>
@@ -44,15 +48,15 @@ Enter name of the application: <input type="text" [(ngModel)]="title" />
           </p>
           <p *ngIf="'All' == chosenGenre()">is active</p>
           
-          <ng-template #elseBlock>
-            <h4 *ngIf="currentFilm.genre == chosenGenre()">
-              {{currentFilm.title}}
-            </h4>
-            <p *ngIf="currentFilm.genre == chosenGenre()">
-              Genre: {{currentFilm.genre}}
-            </p>
-            <p *ngIf="currentFilm.genre == chosenGenre()">is active</p>
-          </ng-template>
+        <ng-template #elseBlock>
+          <h4 *ngIf="currentFilm.genre == chosenGenre()">
+            {{currentFilm.title}}
+          </h4>
+          <p *ngIf="currentFilm.genre == chosenGenre()">
+            Genre: {{currentFilm.genre}}
+          </p>
+          <p *ngIf="currentFilm.genre == chosenGenre()"> is active</p>
+        </ng-template>
         <!-- </div> -->
       </li>
     

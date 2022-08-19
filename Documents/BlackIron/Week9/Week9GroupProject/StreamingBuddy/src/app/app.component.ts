@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StreamingServiceDto } from './streaming-service-dto';
 
 @Component({
   selector: 'app-root',
@@ -10,67 +11,139 @@ export class AppComponent {
   streamingServiceInput : string = "All"
   genreSelectionInput : string = "All"
   filmActiveStatus = false
+  allVisibleByGenre = true
+
+  // VARIABLE TO STORE SEARCH DETAILS
+  // searchedGenre = "";
 
   newFilmTitle = ""
   newFilmGenre = ""
 
   disablesNewMessage = true;
 
-  allServices = {
-        netflix: [
-          {
-            title: "Bird Box",
-            genre: "Mystery",
-            active: true
-          },
-          {
-            title: "Andy Kaufman Film",
-            genre: "Horror",
-            active: true
-          },
-          {
-            title: "The Gray Man",
-            genre: "Action",
-            active: true
-          }
-        ],
+  // SEARCHING THROUGH NESTED StreamingServiceDto
+  // streamingServices.filter(StreamingServiceDto => streamingServiceDto.name == searchedGenre )
 
-        hbo: [
-          {
-            title: "Justice League",
-            genre: "Action",
-            active: true
-          },
-          {
-            title: "Fargo (TV)",
-            genre: "Drama",
-            active: true
-          },
-          { 
-            title: "Whiplash",
-            genre: "Drama",
-            active: true
-          }
-        ],
+  streamingServices: StreamingServiceDto[] = [
+    {
+      name: "Netflix",
+      films: [
+        {
+          title: "Bird Box",
+          genre: "Mystery",
+          active: true
+        },
+        {
+          title: "Im Thinking of Ending Things",
+          genre: "Horror",
+          active: true
+        },
+        {
+          title: "The Grey Man",
+          genre: "Action",
+          active: true
+        }
+      ]
+    },
+    {
+      name: "HBO",
+      films: [
+        {
+          title: "Justice League",
+          genre: "Action",
+          active: true
+        },
+        {
+          title: "The Wire",
+          genre: "Drama",
+          active: true
+        },
+        {
+          title: "Whiplash",
+          genre: "Drama",
+          active: true
+        },
+      ]
+    },
+    {
+      name: "Hulu",
+      films: [
+        {
+          title: "127 Hours",
+          genre: "Suspence",
+          active: true
+        },
+        {
+          title: "Looper",
+          genre: "Action",
+          active: true
+        },
+        {
+          title: "Prometheus",
+          genre: "Sci-Fi",
+          active: true
+        }
+      ]
+    }
+  ]
 
-        hulu: [
-          {
-            title: "127 Hours",
-            genre: "Suspense",
-            active: true
-          },
-          {
-            title: "Looper",
-            genre: "Action",
-            active: true
-          },
-          {
-            title: "Prometheus",
-            genre: "Sci-Fi",
-            active: true
-          }
-        ]
-      }
+  // OLD DATA STRUCTURE
+
+  // allServices = {
+  //       netflix: [
+  //         {
+  //           title: "Bird Box",
+  //           genre: "Mystery",
+  //           active: true
+  //         },
+  //         {
+  //           title: "Andy Kaufman Film",
+  //           genre: "Horror",
+  //           active: true
+  //         },
+  //         {
+  //           title: "The Gray Man",
+  //           genre: "Action",
+  //           active: true
+  //         }
+  //       ],
+
+  //       hbo: [
+  //         {
+  //           title: "Justice League",
+  //           genre: "Action",
+  //           active: true
+  //         },
+  //         {
+  //           title: "Fargo (TV)",
+  //           genre: "Drama",
+  //           active: true
+  //         },
+  //         { 
+  //           title: "Whiplash",
+  //           genre: "Drama",
+  //           active: true
+  //         }
+  //       ],
+
+  //       hulu: [
+  //         {
+  //           title: "127 Hours",
+  //           genre: "Suspense",
+  //           active: true
+  //         },
+  //         {
+  //           title: "Looper",
+  //           genre: "Action",
+  //           active: true
+  //         },
+  //         {
+  //           title: "Prometheus",
+  //           genre: "Sci-Fi",
+  //           active: true
+  //         }
+  //       ]
+  //     }
       
   
 
@@ -112,6 +185,15 @@ export class AppComponent {
     let genreString = ""
     genreString = this.genreSelectionInput
     return genreString;
+  }
+
+  settingGenreFunc() {
+    if(this.genreSelectionInput == "All") {
+      this.allVisibleByGenre = true;
+    }
+    else {
+      this.allVisibleByGenre = false
+    }
   }
 
   constructor() {
