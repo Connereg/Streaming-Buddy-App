@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StreamingServiceDto } from './streaming-service-dto';
+import { MovieDto } from './movie-dto';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +12,18 @@ export class AppComponent {
   streamingServiceInput : string = "All"
   genreSelectionInput : string = "All"
   filmActiveStatus = false
+
+  // MAYBE THROWAWAY
   allVisibleByGenre = true
 
   // VARIABLE TO STORE SEARCH DETAILS
   // searchedGenre = "";
+  searchedStreamingService: MovieDto[] = [];
 
   newFilmTitle = ""
   newFilmGenre = ""
 
   disablesNewMessage = true;
-
-  // SEARCHING THROUGH NESTED StreamingServiceDto
-  // streamingServices.filter(StreamingServiceDto => streamingServiceDto.name == searchedGenre )
 
   streamingServices: StreamingServiceDto[] = [
     {
@@ -30,18 +31,30 @@ export class AppComponent {
       films: [
         {
           title: "Bird Box",
-          genre: "Mystery",
-          active: true
+          genre: [
+            "Mystery",
+            "Sci-Fi"
+          ],
+          active: true,
+          poster: "https://upload.wikimedia.org/wikipedia/en/b/bd/Bird_Box_%28film%29.png"
+
         },
         {
           title: "Im Thinking of Ending Things",
-          genre: "Horror",
-          active: true
+          genre: [
+            "Horror",
+            "Drama"
+          ],
+          active: true,
+          poster: "https://phsnews.com/wp-content/uploads/2020/11/Im_Thinking_of_Ending_Things.jpg"
         },
         {
           title: "The Grey Man",
-          genre: "Action",
-          active: true
+          genre: [
+            "Action"
+          ],
+          active: true,
+          poster: "https://upload.wikimedia.org/wikipedia/en/5/59/The_Gray_Man_poster.png"
         }
       ]
     },
@@ -50,18 +63,28 @@ export class AppComponent {
       films: [
         {
           title: "Justice League",
-          genre: "Action",
-          active: true
+          genre: [
+            "Action"
+          ], 
+          active: true,
+          poster: "https://irs.www.warnerbros.com/keyart-jpeg/movies/media/browser/justice_league_whv_keyart.jpg"
         },
         {
           title: "The Wire",
-          genre: "Drama",
-          active: true
+          genre: [
+            "Drama"
+          ],
+          active: true,
+          poster: "https://m.media-amazon.com/images/I/81ucKbnIugS._SL1500_.jpg"
         },
         {
           title: "Whiplash",
-          genre: "Drama",
-          active: true
+          genre: [
+            "Drama",
+            "Suspense"
+          ],
+          active: true,
+          poster: "https://flxt.tmsimg.com/assets/p10488558_p_v12_ai.jpg"
         },
       ]
     },
@@ -70,138 +93,55 @@ export class AppComponent {
       films: [
         {
           title: "127 Hours",
-          genre: "Suspence",
-          active: true
+          genre: [
+            "Suspense"
+          ],
+          active: true,
+          poster: "https://m.media-amazon.com/images/M/MV5BMTc2NjMzOTE3Ml5BMl5BanBnXkFtZTcwMDE0OTc5Mw@@._V1_.jpg"
         },
         {
           title: "Looper",
-          genre: "Action",
-          active: true
+          genre: [
+            "Action",
+            "Sci-Fi"
+          ],
+          active: true,
+          poster: "https://m.media-amazon.com/images/M/MV5BMTg5NTA3NTg4NF5BMl5BanBnXkFtZTcwNTA0NDYzOA@@._V1_FMjpg_UX1000_.jpg"
         },
         {
           title: "Prometheus",
-          genre: "Sci-Fi",
-          active: true
+          genre: [
+            "Sci-Fi",
+            "Suspense"
+          ],
+          active: true,
+          poster: "https://upload.wikimedia.org/wikipedia/en/a/a3/Prometheusposterfixed.jpg"
         }
       ]
     }
   ]
 
-  // OLD DATA STRUCTURE
+  onUserPreference() {
+    console.log("onUserPreference Working...")
+    console.log("Captured Input: " + this.streamingServiceInput)
+    // SEARCHING THROUGH NESTED StreamingServiceDto
+    let newFilmArray: MovieDto[] = [];
+    if(this.streamingServiceInput == "All") {
+      // NEED TO FILTER FURTHER BASED ON GENRE CRITERIA
+      newFilmArray = this.streamingServices.map(streamingServiceDto => streamingServiceDto.films).flat()
+      if(this.genreSelectionInput !== "All") {
+        newFilmArray = newFilmArray.filter(film => film.genre.includes(this.genreSelectionInput))
+      }
 
-  // allServices = {
-  //       netflix: [
-  //         {
-  //           title: "Bird Box",
-  //           genre: "Mystery",
-  //           active: true
-  //         },
-  //         {
-  //           title: "Andy Kaufman Film",
-  //           genre: "Horror",
-  //           active: true
-  //         },
-  //         {
-  //           title: "The Gray Man",
-  //           genre: "Action",
-  //           active: true
-  //         }
-  //       ],
-
-  //       hbo: [
-  //         {
-  //           title: "Justice League",
-  //           genre: "Action",
-  //           active: true
-  //         },
-  //         {
-  //           title: "Fargo (TV)",
-  //           genre: "Drama",
-  //           active: true
-  //         },
-  //         { 
-  //           title: "Whiplash",
-  //           genre: "Drama",
-  //           active: true
-  //         }
-  //       ],
-
-  //       hulu: [
-  //         {
-  //           title: "127 Hours",
-  //           genre: "Suspense",
-  //           active: true
-  //         },
-  //         {
-  //           title: "Looper",
-  //           genre: "Action",
-  //           active: true
-  //         },
-  //         {
-  //           title: "Prometheus",
-  //           genre: "Sci-Fi",
-  //           active: true
-  //         }
-  //       ]
-  //     }
-      
-  
-
-  //   onUserPreference() {
-  //   let newFilm = {
-      
-  //   }
-  // }
-
-  // onSendPlayer() {
-  //   let newFilm = {
-  //     name: this.senderName,
-  //     sport: this.senderSport,
-  //     active: this.senderActiveStatus
-  //   }
-  //   this.netflix.push(newFilm);
-  // }
-
-  chooseStreamingService() {
-    let newArr: { title: string; genre: string; active: boolean; }[] = [];
-    
-    if(this.streamingServiceInput == "hbo") {
-      newArr = this.allServices.hbo;
     }
-    else if(this.streamingServiceInput == "netflix") {
-      newArr = this.allServices.netflix;
+    else if(this.streamingServiceInput !== "All") {
+        // NEED TO FILTER FURTHER BASED ON GENRE CRITERIA
+      newFilmArray = this.streamingServices.filter(streamingServiceDto => streamingServiceDto.name == this.streamingServiceInput).map(streamingServiceDto => streamingServiceDto.films).flat()
+      if(this.genreSelectionInput !== "All") {
+        newFilmArray = newFilmArray.filter(film => film.genre.includes(this.genreSelectionInput))
+      }
     }
-    else if(this.streamingServiceInput == "hulu") {
-      newArr = this.allServices.hulu;
-    }
-    else { 
-      newArr = this.allServices.hbo.concat(this.allServices.netflix).concat(this.allServices.hulu)
-    }
-
-    return newArr
-  }
-
-  chosenGenre() {
-    let genreString = ""
-    genreString = this.genreSelectionInput
-    return genreString;
-  }
-
-  settingGenreFunc() {
-    if(this.genreSelectionInput == "All") {
-      this.allVisibleByGenre = true;
-    }
-    else {
-      this.allVisibleByGenre = false
-    }
-  }
-
-  constructor() {
-    console.log("Initiating Angular AppComponent Class");
-    setTimeout(() => {
-      this.disablesNewMessage = !this.disablesNewMessage;
-    }
-    , 2000)
+    this.searchedStreamingService = newFilmArray
   }
 }
 

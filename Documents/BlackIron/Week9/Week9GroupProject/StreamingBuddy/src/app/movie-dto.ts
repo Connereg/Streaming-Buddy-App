@@ -1,5 +1,6 @@
 export interface MovieDto {
     title: string;
-    genre: string;
+    genre: string[];
     active: boolean;
+    poster: string;
 }
