@@ -1,0 +1,14 @@
+<div class="container">
+          <div class="row border" style="justify-content: center; padding-top: 1em;">
+            <div *ngFor="let currentFilm of searchedStreamingService" class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img src="{{currentFilm.poster}}" height="384" width="256">
+                <div class="caption">
+                  <h3 >{{currentFilm.title}}</h3>
+                  <p>Genre: {{currentFilm.genre.join(", ")}}</p>
+                  <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>

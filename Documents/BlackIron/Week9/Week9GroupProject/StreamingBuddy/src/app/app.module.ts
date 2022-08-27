@@ -4,10 +4,16 @@ import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ShowFilmsComponent } from './show-films/show-films.component';
+import { SearchFilmsFormComponent } from './search-films-form/search-films-form.component';
+import { AddFilmComponent } from './add-film/add-film.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ShowFilmsComponent,
+    SearchFilmsFormComponent,
+    AddFilmComponent
   ],
   imports: [
     BrowserModule,

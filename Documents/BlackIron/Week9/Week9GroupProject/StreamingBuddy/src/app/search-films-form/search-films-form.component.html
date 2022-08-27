@@ -1,0 +1,24 @@
+<div class="row" id="search-filter-container" style="padding-left: 30px;">
+    <div class="col-md-3" id="stream-service-selection-container">
+    <label for="stream-service-dropdown">Streaming Service: &nbsp;&nbsp;
+      <select name="streamService" id="stream-service-dropdown" [(ngModel)]="streamingServiceInput" (change)="triggerPreferenceChange()">
+        <option value="All" selected>All</option>
+        <option value="HBO">HBO</option>
+        <option value="Netflix">Netflix</option>
+        <option value="Hulu">Hulu</option>
+      </select>
+    </label>
+    </div>
+    <label for="genre-selection-dropdown">Film Genre: &nbsp;&nbsp;
+      <select name="genreSelection" id="genre-selection-dropdown" [(ngModel)]="genreSelectionInput" (change)="triggerPreferenceChange()" style="width: 25%">
+        <option value="All" selected>All</option>
+        <option value="Action">Action</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+        <option value="Suspense">Suspense</option>
+        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Mystery">Mystery</option>
+      </select>
+    </label>
+  </div>
